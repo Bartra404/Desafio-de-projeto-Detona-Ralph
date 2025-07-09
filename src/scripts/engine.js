@@ -1,9 +1,9 @@
 const state = {
   view: {
-    squares: document.querrySelectorAll(".square"),
-    enemy: document.querrySelector(".enemy"),
-    timeLeft: document.querrySelector("#time-left"),
-    score: document.querrySelector("#score"),
+    squares: document.querySelectorAll(".square"),
+    enemy: document.querySelector(".enemy"),
+    timeLeft: document.querySelector("#time-left"),
+    score: document.querySelector("#score"),
   },
   value: {
     gameVelocity: 1000,
@@ -13,19 +13,19 @@ const state = {
   },
   actions: {
     timerId: setInterval(randomSquare, 1000),
-    countDownTimerId: setInterval (countDown, 1000),
+    countDownTimerId: setInterval(countDown, 1000),
   }
 
 };
 
-function countDown () {
+function countDown() {
   state.value.curretTime--;
-  state.view.timeLeft.contendText = state.value.curretTime;
-  
+  state.view.timeLeft.textContent = state.value.curretTime;
+
   if (state.value.curretTime <= 0) {
-    clearInterval (state.actions.countDownTimerId);
-    clearInterval (state.actions.timerId);
-    alert ("Seu tempo acabou, sua pontuação é: " + state.value.result);
+    clearInterval(state.actions.countDownTimerId);
+    clearInterval(state.actions.timerId);
+    alert("Seu tempo acabou, sua pontuação é: " + state.value.result);
   }
 }
 
