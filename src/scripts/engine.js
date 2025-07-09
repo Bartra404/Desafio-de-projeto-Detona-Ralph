@@ -6,12 +6,28 @@ const state = {
     score: document.querrySelector("#score"),
   },
   value: {
-    timerId: null,
     gameVelocity: 1000,
     hitPosition: 0,
     result: 0,
+    curretTime: 60,
   },
+  actions: {
+    timerId: setInterval(randomSquare, 1000),
+    countDownTimerId: setInterval (countDown, 1000),
+  }
+
 };
+
+function countDown () {
+  state.value.curretTime--;
+  state.view.timeLeft.contendText = state.value.curretTime;
+  
+  if (state.value.curretTime <= 0) {
+    clearInterval (state.actions.countDownTimerId);
+    clearInterval (state.actions.timerId);
+    alert ("Seu tempo acabou, sua pontuação é: " + state.value.result);
+  }
+}
 
 function randomSquare() {
   state.view.squares.forEach((square) => {
@@ -21,14 +37,10 @@ function randomSquare() {
   let randomSquare = state.view.squares[randomNumber];
   randomSquare.classList.add("enemy");
   state.value.hitPosition = randomSquare.id;
-}
-
-function moveEnemy() {
-  state.value.timerId = setInterval(randomSquare, state.value.gameValocity);
-}
+};
 
 function addListenerHitBox() {
-  state.view.square.forEach((square) => {
+  state.view.squares.forEach((square) => {
     square.addEventListener("mousedown", () => {
       if (square.id === state.value.hitPosition) {
         state.value.result++;
@@ -37,11 +49,10 @@ function addListenerHitBox() {
       }
     });
   });
-}
+};
 
 function initialize() {
-  moveEnemy();
   addListenerHitBox();
-}
+};
 
 initialize();
