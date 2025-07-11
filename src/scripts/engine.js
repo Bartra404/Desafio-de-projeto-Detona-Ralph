@@ -18,6 +18,12 @@ const state = {
 
 };
 
+function playSounds(sounds) {
+  let sound = new Audio (`../src/sounds/${sounds}.m4a`);
+  sound.volume = 0.2;
+  sound.play();
+}
+
 function countDown() {
   state.value.curretTime--;
   state.view.timeLeft.textContent = state.value.curretTime;
@@ -37,7 +43,7 @@ function randomSquare() {
   let randomSquare = state.view.squares[randomNumber];
   randomSquare.classList.add("enemy");
   state.value.hitPosition = randomSquare.id;
-};
+}
 
 function addListenerHitBox() {
   state.view.squares.forEach((square) => {
@@ -46,13 +52,14 @@ function addListenerHitBox() {
         state.value.result++;
         state.view.score.textContent = state.value.result;
         state.value.hitPosition = null;
+        playSounds("hit");
       }
     });
   });
-};
+}
 
 function initialize() {
   addListenerHitBox();
-};
+}
 
 initialize();
